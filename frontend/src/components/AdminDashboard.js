@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import {
+  Container,
+  Typography,
+  List,
+  ListItem,
+  ListItemText,
+} from "@mui/material";
+import BACKEND_BASE_URL from "../constants";
 
 const AdminDashboard = () => {
   const [items, setItems] = useState([]);
 
   useEffect(() => {
     const fetchItems = async () => {
-      const { data } = await axios.get("/api/items");
+      const { data } = await axios.get(`${BACKEND_BASE_URL}/api/items`);
       setItems(data);
     };
 
@@ -14,14 +22,18 @@ const AdminDashboard = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Admin Dashboard</h1>
-      <ul>
+    <Container>
+      <Typography variant="h4" gutterBottom>
+        Admin Dashboard
+      </Typography>
+      <List>
         {items.map((item) => (
-          <li key={item._id}>{item.name}</li>
+          <ListItem key={item._id}>
+            <ListItemText primary={item.name} />
+          </ListItem>
         ))}
-      </ul>
-    </div>
+      </List>
+    </Container>
   );
 };
 
