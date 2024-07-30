@@ -19,10 +19,14 @@ app.use(
     origin: [
       "http://localhost:3000",
       "http://127.0.0.1:3000",
-      "https://suresh-frontend.vercel.app",
+      "https://mern-app-frontend-delta.vercel.app",
     ],
   })
 );
+
+app.use("/", (req, res) => {
+  res.send("API is running...");
+});
 
 app.use("/api/auth", authRoutes);
 app.use("/api/items", itemRoutes);
