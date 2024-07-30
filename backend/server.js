@@ -14,7 +14,15 @@ connectDB();
 const app = express();
 
 app.use(express.json());
-app.use(cors({ origin: ["http://localhost:3000", "http://127.0.0.1:3000"] }));
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "http://127.0.0.1:3000",
+      "https://suresh-frontend.vercel.app",
+    ],
+  })
+);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/items", itemRoutes);

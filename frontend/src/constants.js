@@ -1,3 +1,3 @@
-const BACKEND_BASE_URL = "http://localhost:5000";
+const BACKEND_BASE_URL = "https://suresh-backend.vercel.app";
 
 export default BACKEND_BASE_URL;
