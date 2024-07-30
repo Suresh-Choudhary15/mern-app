@@ -1,27 +1,24 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../../actions/authActions";
+import axios from "axios";
 
 const Login = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const dispatch = useDispatch();
-  const { userInfo, error } = useSelector((state) => state.userLogin);
-
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    dispatch(loginUser(email, password));
+    try {
+      const { data } = await axios.post("/api/auth/login", { email, password });
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      history.push("/admin");
+    } catch (error) {
+      console.error(error);
+    }
   };
-
-  if (userInfo) {
-    history.push("/");
-  }
 
   return (
     <div>
       <h1>Login</h1>
-      {error && <p>{error}</p>}
       <form onSubmit={submitHandler}>
         <div>
           <label>Email</label>
